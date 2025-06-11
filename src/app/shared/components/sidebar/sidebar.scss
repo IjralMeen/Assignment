@@ -1,0 +1,26 @@
+:host ::ng-deep li a {
+  color: #4F3422;
+  .icon-active {
+    display: none;
+  }
+  &.active {
+    color: whitesmoke !important;
+    background: #05143F;
+    .icon-active {
+      display: block !important;
+    }
+    .icon-default {
+      display: none;
+    }
+    span {
+      transform: translateX(10px);
+      transition: transform 0.5s ease;
+    }
+  }
+}
+
+
+//scrollbar
+::-webkit-scrollbar {
+    width: 4px;
+}

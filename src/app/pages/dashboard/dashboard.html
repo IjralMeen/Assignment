@@ -1,0 +1,125 @@
+<div class="flex justify-between">
+  <p class="font-bold text-xl">My Dashboard</p>
+  <div class="flex gap-3">
+    <button class="rounded-md text-xs bg-[#00486D] text-white px-2 h-[30px]">Today</button>
+    <button class="rounded-md text-xs text-[#00486D] px-2 py-1 h-[30px]">Week</button>
+    <button class="rounded-md text-xs text-[#00486D] px-2 py-1 h-[30px]">Month</button>
+    <input type="date" class="border border-[#A1A1A1] rounded-md px-1" placeholder="Select Date">
+  </div>
+</div>
+<div class="flex justify-between w-[100%] mt-2">
+  <div class="w-[40%]">
+    <div class="grid grid-cols-3 gap-4">
+      <div class="rounded-xl flex flex-col py-4 px-3 shadow-md bg-white space-y-4">
+        <p class="text-xs">Answered Calls</p>
+        <p class="text-xl font-bold">3329</p>
+      </div>
+      <div class="rounded-xl flex flex-col py-4 px-3 shadow-md bg-white space-y-4">
+        <p class="text-xs">Total Calls</p>
+        <p class="text-xl font-bold">3329</p>
+      </div>
+      <div class="rounded-xl flex flex-col py-4 px-3 shadow-md bg-white space-y-4">
+        <p class="text-xs">Abdomened Calls</p>
+        <p class="text-xl font-bold">3329</p>
+      </div>
+      <div class="rounded-xl flex flex-col py-4 px-3 shadow-md bg-white space-y-4">
+        <p class="text-xs">Talktime</p>
+        <p class="text-xl font-bold text-center">33 HRS</p>
+      </div>
+      <div class="rounded-xl flex flex-col py-4 px-3 shadow-md bg-white space-y-4">
+        <p class="text-xs">Avg Wait Time</p>
+        <p class="text-xl font-bold">21Min 10Sec </p>
+      </div>
+      <div class="rounded-xl flex flex-col py-4 px-3 shadow-md bg-white space-y-4">
+        <p class="text-xs">Avg Call Time</p>
+        <p class="text-xl font-bold">21Min 10Sec </p>
+      </div>
+    </div>
+  </div>
+  <div class="w-[20%] shadow-md rounded-xl p-4 bg-white">
+    <p class="text-xs">Issue Status</p>
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+      style="width: 100%; height: 150px; display: block;">
+    </highcharts-chart>
+  </div>
+  <div class="w-[35%] shadow-md rounded-lg p-4 bg-white">
+    <p class="text-xs">Issue Category</p>
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions2"
+      style="width: 100%; height: 150px; display: block;">
+    </highcharts-chart>
+  </div>
+
+</div>
+<div class="flex flex-col mt-3">
+  <div class="flex justify-between">
+    <p class="font-bold text-xl">Call Management</p>
+    <div class="flex gap-3">
+      <button class="rounded-xl bg-[#00486D] text-white px-2">History</button>
+      <button class="rounded-xl text-[#00486D] px-2 py-1">In Progress</button>
+    </div>
+  </div>
+  <div class="rounded-lg mt-3 bg-white shadow-md">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="dealerName">
+        <th mat-header-cell *matHeaderCellDef> Dealer Name </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="flex items-center gap-3">
+            <img src="./images/dealerLogo1.png" class="w-7 h-5" alt="">
+            <div>
+              <p class="text-[12px]"> {{element.dealerName}}</p>
+              <p class="text-[12px]"> {{element.dealerNumber}}</p>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="additionalInfo">
+        <th mat-header-cell *matHeaderCellDef> Additonal Info </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="flex flex-col text-center justify-center">
+            <p class="text-[12px]"> {{element.additionalInfo}}</p>
+            <p class="text-[12px]"> {{element.additionalNumber}}</p>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="issueCategory">
+        <th mat-header-cell *matHeaderCellDef> Issue Category </th>
+        <td mat-cell *matCellDef="let element" class="text-[12px]"> {{element.issueCategory}} </td>
+      </ng-container>
+      <ng-container matColumnDef="issueStatus">
+        <th mat-header-cell *matHeaderCellDef> Issue Status </th>
+        <td mat-cell *matCellDef="let element" class="text-[12px]"> {{element.issueStatus}} </td>
+      </ng-container>
+      <ng-container matColumnDef="comments">
+        <th mat-header-cell *matHeaderCellDef> Comments </th>
+        <td mat-cell *matCellDef="let element" class="text-[12px]"> {{element.comments}} </td>
+      </ng-container>
+      <ng-container matColumnDef="callStatus">
+        <th mat-header-cell *matHeaderCellDef> Call Status </th>
+        <td mat-cell *matCellDef="let element" class="text-[12px]"> {{element.callStatus}} </td>
+      </ng-container>
+      <ng-container matColumnDef="callDetails">
+        <th mat-header-cell *matHeaderCellDef> Call Details </th>
+        <td mat-cell *matCellDef="let element" class="text-[12px]">
+          <div class="flex flex-col">
+            <p>{{element.callDate}}</p>
+            <div class="flex">
+              <p>{{element.callTime}}|<span>{{element.callMinute}}</span></p>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" class="text-[12px]">
+          <div class="gap-2 cursor-pointer">
+            <mat-icon>info</mat-icon>
+            <mat-icon>date_range</mat-icon>
+            <mat-icon> chat</mat-icon>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
